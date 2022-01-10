@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.javaex.Util.WebUtil;
 import com.javaex.dao.GuestbookDao;
 import com.javaex.vo.GuestbookVo;
 
@@ -39,8 +40,6 @@ public class GuestbookController extends HttpServlet {
 		// 3. 보낼 때 한글처리
 		response.setContentType("text/html; charset=UTF-8");   
 		
-		
-		
 		System.out.println("GuestbookController model2 시작");
 
 		String act = request.getParameter("action");
@@ -58,9 +57,9 @@ public class GuestbookController extends HttpServlet {
 			out.println("<head>");
 
 //			포워드
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/addList.jsp");
-			rd.forward(request, response);
+			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
 
+			
 //			게스트북 에러 확인 에러안남
 //			System.out.println(guestbookList);
 
@@ -85,16 +84,16 @@ public class GuestbookController extends HttpServlet {
 			guestbookDao.ContentInsert(guestbookVo);
 
 //			리다이렉트
-			response.sendRedirect("/guestbook2/gbc?action=addList");
+			WebUtil.redirect(request, response, "/guestbook2/gbc");
 
 //		삭제 폼 addList에서 글id 받아서 포워딩해줘야함	
 		} else if ("deleteForm".equals(act)) {
 			System.out.println("action = deleteForm");
 
-//			포워드 
-			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/deleteForm.jsp");
-			rd.forward(request, response);
+//			포워드
+			WebUtil.forward(request, response, "/WEB-INF/addList.jsp");
 
+			
 //		삭제	
 		} else if ("delete".equals(act)) {
 			System.out.println("action = delete");
@@ -109,13 +108,15 @@ public class GuestbookController extends HttpServlet {
 
 			guestbookDao.ContentDelete(ContentNo, password);
 
-//			리다이렉트 - 포워드하면 에러남
-			response.sendRedirect("/guestbook2/gbc?action=addList");
+//			리다이렉트
+			WebUtil.redirect(request, response, "/guestbook2/gbc");
 
+			
 		} else {
 			System.out.println("파라미터 값 없음");
 		}
-
+		
+		
 	} // doGet 종료
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
