@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<%@ page import="com.javaex.vo.GuestbookVo"%>
-
 <%
+//addList 에서 받아온 no를 숫자로 바꿔준다
+//int ContentNo = Integer.parseInt(request.getParameter("no"));
 
-GuestbookVo guestbookVo = (GuestbookVo)request.getAttribute("gbVo");
-
-//addList 에서 받아온 id를 숫자로 바꿔준다
-int ContentId = Integer.parseInt(request.getParameter("id"));
-
-int id = guestbookVo.getNo();
-String password = guestbookVo.getPassword();
+String no = request.getParameter("no");
 %>
 
 
@@ -29,16 +23,16 @@ String password = guestbookVo.getPassword();
 		<table>
 			<tr>
 				<td>방명록 글ID (type=hidden 처리예정)</td>
-				<td><input type="text" name="no" value="<%=id%>" readonly>
+				<td><input type="text" name="no" value="<%=no%>" readonly>
 				<input type="hidden" name="action" value="delete">
 				</td>
 			</tr>
 
 			<tr>
-				<td>비밀번호</td>
+				<td>비밀번호 password</td>
 				<td><input type="password" name="password"
-					value="<%=password%>">
-					<button type="submit">삭제</button></td>
+					value=" " focus>
+					<button type="submit">삭제 Del</button></td>
 			</tr>
 		</table>
 	</form>

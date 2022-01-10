@@ -37,7 +37,6 @@ System.out.println(guestbookList.toString());
 			</tr>
 			<tr>
 			</tr>
-			
 			<tr>
 				<td><button type="submit">저장 Post</button></td>
 			</tr>
@@ -49,23 +48,25 @@ System.out.println(guestbookList.toString());
 	<!-- 리스트영역 -->
 	<%
 	for (int i = 0; i < guestbookList.size(); i++) {
+		/* GuestbookVo guestbookVo = guestbookList.get(i); */
 	%>
-	<form action="/guestbook2/gbc" method=get>
+	<!-- <form action="/guestbook2/gbc" method="get"> -->
 	<table border="1" width="500px">
 		<tr>
 			<td><input type="text" name="no" value="<%=guestbookList.get(i).getNo()%>"></td>
 			<td><%=guestbookList.get(i).getName()%></td>
 			<td><%=guestbookList.get(i).getRegDate()%></td>
-			
-			<td><a href="/guestbook2/deleteForm.jsp?id=<%=guestbookList.get(i).getNo()%>">삭제 Del</a>
-			<input type="hidden" name="action" value="deleteForm">
+			<!-- <input type="hidden" name="action" value="deleteForm"> -->
+			<td>
+			<!-- <button type="submit">수정저장</button> -->
+	<a href="/guestbook2/gbc?action=deleteForm&no=<%=guestbookList.get(i).getNo()%>">삭제 Del</a>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="4"><%=guestbookList.get(i).getContent()%></td>
 		</tr>
 	</table>
-	</form>
+	<!-- </form> -->
 	<!-- 리스트영역 종료-->
 	<br>
 	<%
