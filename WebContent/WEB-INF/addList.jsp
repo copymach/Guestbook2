@@ -6,9 +6,8 @@
 //guestbook List 가져오기
 //모델1에서는 dao에서 불러왔지만 모델2에서는 getAttribute 사용 
 List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gList");
-
 //테스트
-System.out.println(guestbookList.toString());
+//System.out.println(guestbookList.toString());
 %>
 
 <!DOCTYPE html>
@@ -25,9 +24,9 @@ System.out.println(guestbookList.toString());
 	<form action="/guestbook2/gbc" method="get">
 		<table border="1" width="500px">
 			<tr>
-				<td>이름(name)</td>
+				<td> 이름(name) </td>
 				<td><input type="text" name="name" value=""></td>
-				<td>비밀번호(password)</td>
+				<td> 비밀번호(password) </td>
 				<td><input type="password" name="password" value="">
 				<input type="hidden" name="action" value="write"></td>
 			</tr>

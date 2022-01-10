@@ -14,6 +14,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.javaex.dao.GuestbookDao;
 import com.javaex.vo.GuestbookVo;
 
+//한글출력 문제 해결하기
+//링크 http://localhost:8088/guestbook2/gbc?action=addList
+//링크 동작하게 만들기 http://localhost:8088/guestbook2/gbc	
+
 @WebServlet("/gbc") // GuestbookController
 public class GuestbookController extends HttpServlet {
 	private static final long serialVersionUID = 1L; // 식별자라고 함 생략가능
@@ -21,11 +25,22 @@ public class GuestbookController extends HttpServlet {
 	public GuestbookController() {
 		// 기본생성자 생략가능
 	}
-
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+	
+//	service 상위 호환 doGet doPost 한글깨짐 해결위해 서비스 사용
+	protected void service (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-
+		
+		// 1. 받을 때 : 한글깨짐 해결(post 방식)
+		request.setCharacterEncoding("UTF-8");    
+		// 2. 받을 때 : GET방식 처리
+//		String filename = 
+//		new  String(request.getParameter("parameter").getBytes("8859_1"),"KSC5601");   
+		// 3. 보낼 때 한글처리
+		response.setContentType("text/html; charset=UTF-8");   
+		
+		
+		
 		System.out.println("GuestbookController model2 시작");
 
 		String act = request.getParameter("action");
@@ -105,8 +120,9 @@ public class GuestbookController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-//		출력 페이지 한글 표시 문제 해결
+		
+//		post방식은 한글 데이터 주고받을때 무조건 깨진다
+//		출력 페이지 한글 표시 문제 해결 (post방식용)
 		request.setCharacterEncoding("UTF-8");
 
 		doGet(request, response);
