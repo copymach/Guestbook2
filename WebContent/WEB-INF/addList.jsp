@@ -4,6 +4,7 @@
 <%@ page import="com.javaex.vo.GuestbookVo"%>
 
 <%
+System.out.println("addList 시작");
 //guestbook List 가져오기
 //모델1에서는 dao에서 불러왔지만 모델2에서는 getAttribute 사용 
 List<GuestbookVo> guestbookList = (List<GuestbookVo>) request.getAttribute("gList");

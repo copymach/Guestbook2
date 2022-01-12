@@ -4,15 +4,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.javaex.Util.WebUtil;
 import com.javaex.dao.GuestbookDao;
+import com.javaex.util.WebUtil;
 import com.javaex.vo.GuestbookVo;
 
 //한글출력 문제 해결하기
@@ -28,9 +27,9 @@ public class GuestbookController extends HttpServlet {
 	}
 	
 //	service 상위 호환 doGet doPost 한글깨짐 해결위해 서비스 사용
-	protected void service (HttpServletRequest request, HttpServletResponse response)
+	protected void doGet (HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		// 1. 받을 때 : 한글깨짐 해결(post 방식)
 		request.setCharacterEncoding("UTF-8");    
